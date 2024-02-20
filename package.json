@@ -4,11 +4,11 @@
   "description": "Syntax highlighting for SFText",
   "version": "1.0.0",
   "publisher": "dotprologue",
-  "icon": "icon.png",
+  "icon": "./images/icon.png",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ItoAkira2023/ScenarioFlow.git"
+    "url": "https://github.com/dotprologue/sftext-syntax.git"
   },
   "engines": {
     "vscode": "^1.81.0"
