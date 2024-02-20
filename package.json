@@ -1,0 +1,45 @@
+{
+  "name": "sftext-syntax",
+  "displayName": "SFText Syntax",
+  "description": "Syntax highlighting for SFText",
+  "version": "1.0.0",
+  "publisher": "dotprologue",
+  "icon": "icon.png",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ItoAkira2023/ScenarioFlow.git"
+  },
+  "engines": {
+    "vscode": "^1.81.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "keywords": [
+    "sftext",
+    "scenarioflow"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "sftext",
+        "aliases": [
+          "SFText",
+          "sftext"
+        ],
+        "extensions": [
+          ".sftxt"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "sftext",
+        "scopeName": "source.sftext",
+        "path": "./syntaxes/sftext.tmLanguage.json"
+      }
+    ]
+  }
+}

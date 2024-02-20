@@ -1,0 +1,618 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "SFText",
+	"patterns": [
+		{
+			"match": "^\\s*(//.*?)(\\|)(.*?)(\\|)(.*)$",
+			"captures": {
+				"1": {
+					"name": "comment.line.double-slash"
+				},
+				"2": {
+					"name": "meta.preprocessor"
+				},
+				"3": {
+					"name": "comment.line.double-slash"
+				},
+				"4": {
+					"name": "meta.preprocessor"
+				},
+				"5": {
+					"name": "comment.line.double-slash"
+				}
+			}
+		},
+		{
+			"match": "^\\s*(\\|)(.*?)(\\|)(.*)$",
+			"captures": {
+				"1": {
+					"name": "meta.preprocessor"
+				},
+				"2": {
+					"name": "comment.line.double-slash"
+				},
+				"3": {
+					"name": "meta.preprocessor"
+				},
+				"4": {
+					"name": "comment.line.double-slash"
+				}
+			}
+		},
+		{
+			"begin": "^(\\s*#.*?\\|.*?\\|.*)$",
+			"beginCaptures": {
+				"1": {
+					"patterns": [
+						{
+							"match": "^\\s*(#)(command|xcommand|token|define|label)\\s*(\\|)(.*?)(\\|)(.*)$",
+							"captures": {
+								"1": {
+									"name": "variable.parameter"
+								},
+								"2": {
+									"name": "variable.parameter"
+								},
+								"3": {
+									"name": "variable.parameter"
+								},
+								"4": {
+									"patterns": [
+										{
+											"include": "#argument"
+										}
+									]
+								},
+								"5": {
+									"name": "variable.parameter"
+								},
+								"6": {
+									"name": "comment.line.double-slash"
+								}
+							}
+						}
+					]
+				}
+			},
+			"end": "(?=(^\\s*(?!//)[^\\s\\|].*?\\|.*?\\|.*$))",
+			"patterns": [
+				{
+					"match": "^\\s*(\\|)(.*?)(\\|)(.*)$",
+					"captures": {
+						"1": {
+							"name": "variable.parameter"
+						},
+						"2": {
+							"patterns": [
+								{
+									"include": "#argument"
+								}
+							]
+						},
+						"3": {
+							"name": "variable.parameter"
+						},
+						"4": {
+							"name": "comment.line.double-slash"
+						}
+					}
+				},
+				{
+					"match": "^\\s*(//.*?)(\\|)(.*?)(\\|)(.*)$",
+					"captures": {
+						"1": {
+							"name": "comment.line.double-slash"
+						},
+						"2": {
+							"name": "variable.parameter"
+						},
+						"3": {
+							"name": "comment.line.double-slash"
+						},
+						"4": {
+							"name": "variable.parameter"
+						},
+						"5": {
+							"name": "comment.line.double-slash"
+						}
+					}
+				}
+			]
+		},
+		{
+			"begin": "^\\s*(\\$)(standard|f-standard|s-standard|p-standard)\\s*(\\|)(.*?)(\\|)(.*)$",
+			"beginCaptures": {
+				"1": {
+					"name": "entity.name.method"
+				},
+				"2": {
+					"name": "entity.name.method"
+				},
+				"3": {
+					"name": "entity.name.method"
+				},
+				"4": {
+					"name": "entity.name.method"
+				},
+				"5": {
+					"name": "entity.name.method"
+				},
+				"6": {
+					"name": "comment.line.double-slash"
+				}
+			},
+			"end": "(?=(^\\s*(?!//)[^\\s\\|].*?\\|.*?\\|.*$))",
+			"patterns": [
+				{
+					"match": "^\\s*(\\|)(.*?)(\\|)(.*)$",
+					"captures": {
+						"1": {
+							"name": "entity.name.method"
+						},
+						"2": {
+							"patterns": [
+								{
+									"include": "#argument"
+								}
+							]
+						},
+						"3": {
+							"name": "entity.name.method"
+						},
+						"4": {
+							"name": "comment.line.double-slash"
+						}
+					}
+				},
+				{
+					"match": "^\\s*(//.*?)(\\|)(.*?)(\\|)(.*)$",
+					"captures": {
+						"1": {
+							"name": "comment.line.double-slash"
+						},
+						"2": {
+							"name": "entity.name.method"
+						},
+						"3": {
+							"name": "comment.line.double-slash"
+						},
+						"4": {
+							"name": "entity.name.method"
+						},
+						"5": {
+							"name": "comment.line.double-slash"
+						}
+					}
+				}
+			]
+		},
+		{
+			"begin": "^\\s*(\\$)(forced|f-forced|s-forced|p-forced)\\s*(\\|)(.*?)(\\|)(.*)$",
+			"beginCaptures": {
+				"1": {
+					"name": "entity.name.function"
+				},
+				"2": {
+					"name": "entity.name.function"
+				},
+				"3": {
+					"name": "entity.name.function"
+				},
+				"4": {
+					"name": "entity.name.function"
+				},
+				"5": {
+					"name": "entity.name.function"
+				},
+				"6": {
+					"name": "comment.line.double-slash"
+				}
+			},
+			"end": "(?=(^\\s*(?!//)[^\\s\\|].*?\\|.*?\\|.*$))",
+			"patterns": [
+				{
+					"match": "^\\s*(\\|)(.*?)(\\|)(.*)$",
+					"captures": {
+						"1": {
+							"name": "entity.name.function"
+						},
+						"2": {
+							"patterns": [
+								{
+									"include": "#argument"
+								}
+							]
+						},
+						"3": {
+							"name": "entity.name.function"
+						},
+						"4": {
+							"name": "comment.line.double-slash"
+						}
+					}
+				},
+				{
+					"match": "^\\s*(//.*?)(\\|)(.*?)(\\|)(.*)$",
+					"captures": {
+						"1": {
+							"name": "comment.line.double-slash"
+						},
+						"2": {
+							"name": "entity.name.function"
+						},
+						"3": {
+							"name": "comment.line.double-slash"
+						},
+						"4": {
+							"name": "entity.name.function"
+						},
+						"5": {
+							"name": "comment.line.double-slash"
+						}
+					}
+				}
+			]
+		},
+		{
+			"begin": "^\\s*(\\$)(promised|f-promised|s-promised|p-promised)\\s*(\\|)(.*?)(\\|)(.*)$",
+			"beginCaptures": {
+				"1": {
+					"name": "support.function"
+				},
+				"2": {
+					"name": "support.function"
+				},
+				"3": {
+					"name": "support.function"
+				},
+				"4": {
+					"name": "support.function"
+				},
+				"5": {
+					"name": "support.function"
+				},
+				"6": {
+					"name": "comment.line.double-slash"
+				}
+			},
+			"end": "(?=(^\\s*(?!//)[^\\s\\|].*?\\|.*?\\|.*$))",
+			"patterns": [
+				{
+					"match": "^\\s*(\\|)(.*?)(\\|)(.*)$",
+					"captures": {
+						"1": {
+							"name": "support.function"
+						},
+						"2": {
+							"patterns": [
+								{
+									"include": "#argument"
+								}
+							]
+						},
+						"3": {
+							"name": "support.function"
+						},
+						"4": {
+							"name": "comment.line.double-slash"
+						}
+					}
+				},
+				{
+					"match": "^\\s*(//.*?)(\\|)(.*?)(\\|)(.*)$",
+					"captures": {
+						"1": {
+							"name": "comment.line.double-slash"
+						},
+						"2": {
+							"name": "support.function"
+						},
+						"3": {
+							"name": "comment.line.double-slash"
+						},
+						"4": {
+							"name": "support.function"
+						},
+						"5": {
+							"name": "comment.line.double-slash"
+						}
+					}
+				}
+			]
+		},
+		{
+			"begin": "^\\s*(\\$)(parallel)\\s*(\\|)\\s*(.*?)(\\|)(.*)$",
+			"beginCaptures": {
+				"1": {
+					"name": "storage.type.annotation"
+				},
+				"2": {
+					"name": "storage.type.annotation"
+				},
+				"3": {
+					"name": "storage.type.annotation"
+				},
+				"4": {
+					"name": "storage.type.annotation"
+				},
+				"5": {
+					"name": "storage.type.annotation"
+				},
+				"6": {
+					"name": "comment.line.double-slash"
+				}
+			},
+			"end": "(?=(^\\s*(?!//)[^\\s\\|].*?\\|.*?\\|.*$))",
+			"patterns": [
+				{
+					"match": "^\\s*(\\|)(.*?)(\\|)(.*)$",
+					"captures": {
+						"1": {
+							"name": "storage.type.annotation"
+						},
+						"2": {
+							"patterns": [
+								{
+									"include": "#argument"
+								}
+							]
+						},
+						"3": {
+							"name": "storage.type.annotation"
+						},
+						"4": {
+							"name": "comment.line.double-slash"
+						}
+					}
+				},
+				{
+					"match": "^\\s*(//.*?)(\\|)(.*?)(\\|)(.*)$",
+					"captures": {
+						"1": {
+							"name": "comment.line.double-slash"
+						},
+						"2": {
+							"name": "storage.type.annotation"
+						},
+						"3": {
+							"name": "comment.line.double-slash"
+						},
+						"4": {
+							"name": "storage.type.annotation"
+						},
+						"5": {
+							"name": "comment.line.double-slash"
+						}
+					}
+				}
+			]
+		},
+		{
+			"begin": "^\\s*(\\$)(serial)\\s*(\\|)\\s*(.*?)(\\|)(.*)$",
+			"beginCaptures": {
+				"1": {
+					"name": "constant.character.escape"
+				},
+				"2": {
+					"name": "constant.character.escape"
+				},
+				"3": {
+					"name": "constant.character.escape"
+				},
+				"4": {
+					"name": "constant.character.escape"
+				},
+				"5": {
+					"name": "constant.character.escape"
+				},
+				"6": {
+					"name": "comment.line.double-slash"
+				}
+			},
+			"end": "(?=(^\\s*(?!//)[^\\s\\|].*?\\|.*?\\|.*$))",
+			"patterns": [
+				{
+					"match": "^\\s*(\\|)(.*?)(\\|)(.*)$",
+					"captures": {
+						"1": {
+							"name": "constant.character.escape"
+						},
+						"2": {
+							"patterns": [
+								{
+									"include": "#argument"
+								}
+							]
+						},
+						"3": {
+							"name": "constant.character.escape"
+						},
+						"4": {
+							"name": "comment.line.double-slash"
+						}
+					}
+				},
+				{
+					"match": "^\\s*(//.*?)(\\|)(.*?)(\\|)(.*)$",
+					"captures": {
+						"1": {
+							"name": "comment.line.double-slash"
+						},
+						"2": {
+							"name": "constant.character.escape"
+						},
+						"3": {
+							"name": "comment.line.double-slash"
+						},
+						"4": {
+							"name": "constant.character.escape"
+						},
+						"5": {
+							"name": "comment.line.double-slash"
+						}
+					}
+				}
+			]
+		},
+		{
+			"begin": "^\\s*(\\$)(.*?)(\\|)\\s*(.*?)(\\|)(.*)$",
+			"beginCaptures": {
+				"1": {
+					"name": "meta.preprocessor"
+				},
+				"2": {
+					"name": "meta.preprocessor"
+				},
+				"3": {
+					"name": "meta.preprocessor"
+				},
+				"4": {
+					"name": "meta.preprocessor"
+				},
+				"5": {
+					"name": "meta.preprocessor"
+				},
+				"6": {
+					"name": "comment.line.double-slash"
+				}
+			},
+			"end": "(?=(^\\s*(?!//)[^\\s\\|].*?\\|.*?\\|.*$))",
+			"patterns": [
+				{
+					"match": "^\\s*(\\|)(.*?)(\\|)(.*)$",
+					"captures": {
+						"1": {
+							"name": "meta.preprocessor"
+						},
+						"2": {
+							"patterns": [
+								{
+									"include": "#argument"
+								}
+							]
+						},
+						"3": {
+							"name": "meta.preprocessor"
+						},
+						"4": {
+							"name": "comment.line.double-slash"
+						}
+					}
+				},
+				{
+					"match": "^\\s*(//.*?)(\\|)(.*?)(\\|)(.*)$",
+					"captures": {
+						"1": {
+							"name": "comment.line.double-slash"
+						},
+						"2": {
+							"name": "meta.preprocessor"
+						},
+						"3": {
+							"name": "comment.line.double-slash"
+						},
+						"4": {
+							"name": "meta.preprocessor"
+						},
+						"5": {
+							"name": "comment.line.double-slash"
+						}
+					}
+				}
+			]
+		},
+		{
+			"begin": "^(\\s*[^\\s\\|].*?\\|\\s*.*?)(\\|)(.*)$",
+			"beginCaptures": {
+				"1": {
+					"name": "string.quoted.double"
+				},
+				"2": {
+					"name": "string.quoted.double"
+				},
+				"3": {
+					"name": "comment.line.double-slash"
+				}
+			},
+			"end": "(?=(^\\s*(?!//)[^\\s\\|].*?\\|.*?\\|.*$))",
+			"patterns": [
+				{
+					"match": "^\\s*(\\|)\\s*(\\-\\-\\>)(.*?)(\\|)(.*)$",
+					"captures": {
+						"1": {
+							"name": "string.quoted.double"
+						},
+						"2": {
+							"name": "variable.parameter"
+						},
+						"3": {
+							"patterns": [
+								{
+									"include": "#argument"
+								}
+							]
+						},
+						"4": {
+							"name": "string.quoted.double"
+						},
+						"5": {
+							"name": "comment.line.double-slash"
+						}
+					}
+				},
+				{
+					"match": "^\\s*(\\|)(.*?)(\\|)(.*)$",
+					"captures": {
+						"1": {
+							"name": "string.quoted.double"
+						},
+						"2": {
+							"name": "string.quoted.double"
+						},
+						"3": {
+							"name": "string.quoted.double"
+						},
+						"4": {
+							"name": "comment.line.double-slash"
+						}
+					}
+				},
+				{
+					"match": "^\\s*(//.*?)(\\|)(.*?)(\\|)(.*)$",
+					"captures": {
+						"1": {
+							"name": "comment.line.double-slash"
+						},
+						"2": {
+							"name": "string.quoted.double"
+						},
+						"3": {
+							"name": "comment.line.double-slash"
+						},
+						"4": {
+							"name": "string.quoted.double"
+						},
+						"5": {
+							"name": "comment.line.double-slash"
+						}
+					}
+				}
+			]
+		}
+	],
+	"repository": {
+		"argument": {
+			"patterns": [
+				{
+					"name": "variable.parameter",
+					"match": "{(.*?)}"
+				},
+				{
+					"name": "comment.line.double-dash",
+					"match": ".+?"
+				}
+			]
+		}
+	},
+	"scopeName": "source.sftext"
+}
