@@ -74,7 +74,7 @@
 					]
 				}
 			},
-			"end": "(?=(^\\s*(?!//)[^\\s\\|].*?\\|.*?\\|.*$))",
+			"end": "(?=^(\\s*[^\\s\\|].*?\\|.*?\\|.*|\\s*\\|\\s*\\|.*)$)",
 			"patterns": [
 				{
 					"match": "^\\s*(\\|)(.*?)(\\|)(.*)$",
@@ -93,26 +93,6 @@
 							"name": "variable.parameter"
 						},
 						"4": {
-							"name": "comment.line.double-slash"
-						}
-					}
-				},
-				{
-					"match": "^\\s*(//.*?)(\\|)(.*?)(\\|)(.*)$",
-					"captures": {
-						"1": {
-							"name": "comment.line.double-slash"
-						},
-						"2": {
-							"name": "variable.parameter"
-						},
-						"3": {
-							"name": "comment.line.double-slash"
-						},
-						"4": {
-							"name": "variable.parameter"
-						},
-						"5": {
 							"name": "comment.line.double-slash"
 						}
 					}
@@ -141,7 +121,7 @@
 					"name": "comment.line.double-slash"
 				}
 			},
-			"end": "(?=(^\\s*(?!//)[^\\s\\|].*?\\|.*?\\|.*$))",
+			"end": "(?=^(\\s*[^\\s\\|].*?\\|.*?\\|.*|\\s*\\|\\s*\\|.*)$)",
 			"patterns": [
 				{
 					"match": "^\\s*(\\|)(.*?)(\\|)(.*)$",
@@ -160,26 +140,6 @@
 							"name": "entity.name.method"
 						},
 						"4": {
-							"name": "comment.line.double-slash"
-						}
-					}
-				},
-				{
-					"match": "^\\s*(//.*?)(\\|)(.*?)(\\|)(.*)$",
-					"captures": {
-						"1": {
-							"name": "comment.line.double-slash"
-						},
-						"2": {
-							"name": "entity.name.method"
-						},
-						"3": {
-							"name": "comment.line.double-slash"
-						},
-						"4": {
-							"name": "entity.name.method"
-						},
-						"5": {
 							"name": "comment.line.double-slash"
 						}
 					}
@@ -208,7 +168,7 @@
 					"name": "comment.line.double-slash"
 				}
 			},
-			"end": "(?=(^\\s*(?!//)[^\\s\\|].*?\\|.*?\\|.*$))",
+			"end": "(?=^(\\s*[^\\s\\|].*?\\|.*?\\|.*|\\s*\\|\\s*\\|.*)$)",
 			"patterns": [
 				{
 					"match": "^\\s*(\\|)(.*?)(\\|)(.*)$",
@@ -227,26 +187,6 @@
 							"name": "entity.name.function"
 						},
 						"4": {
-							"name": "comment.line.double-slash"
-						}
-					}
-				},
-				{
-					"match": "^\\s*(//.*?)(\\|)(.*?)(\\|)(.*)$",
-					"captures": {
-						"1": {
-							"name": "comment.line.double-slash"
-						},
-						"2": {
-							"name": "entity.name.function"
-						},
-						"3": {
-							"name": "comment.line.double-slash"
-						},
-						"4": {
-							"name": "entity.name.function"
-						},
-						"5": {
 							"name": "comment.line.double-slash"
 						}
 					}
@@ -275,7 +215,7 @@
 					"name": "comment.line.double-slash"
 				}
 			},
-			"end": "(?=(^\\s*(?!//)[^\\s\\|].*?\\|.*?\\|.*$))",
+			"end": "(?=^(\\s*[^\\s\\|].*?\\|.*?\\|.*|\\s*\\|\\s*\\|.*)$)",
 			"patterns": [
 				{
 					"match": "^\\s*(\\|)(.*?)(\\|)(.*)$",
@@ -294,26 +234,6 @@
 							"name": "support.function"
 						},
 						"4": {
-							"name": "comment.line.double-slash"
-						}
-					}
-				},
-				{
-					"match": "^\\s*(//.*?)(\\|)(.*?)(\\|)(.*)$",
-					"captures": {
-						"1": {
-							"name": "comment.line.double-slash"
-						},
-						"2": {
-							"name": "support.function"
-						},
-						"3": {
-							"name": "comment.line.double-slash"
-						},
-						"4": {
-							"name": "support.function"
-						},
-						"5": {
 							"name": "comment.line.double-slash"
 						}
 					}
@@ -342,7 +262,7 @@
 					"name": "comment.line.double-slash"
 				}
 			},
-			"end": "(?=(^\\s*(?!//)[^\\s\\|].*?\\|.*?\\|.*$))",
+			"end": "(?=^(\\s*[^\\s\\|].*?\\|.*?\\|.*|\\s*\\|\\s*\\|.*)$)",
 			"patterns": [
 				{
 					"match": "^\\s*(\\|)(.*?)(\\|)(.*)$",
@@ -361,26 +281,6 @@
 							"name": "storage.type.annotation"
 						},
 						"4": {
-							"name": "comment.line.double-slash"
-						}
-					}
-				},
-				{
-					"match": "^\\s*(//.*?)(\\|)(.*?)(\\|)(.*)$",
-					"captures": {
-						"1": {
-							"name": "comment.line.double-slash"
-						},
-						"2": {
-							"name": "storage.type.annotation"
-						},
-						"3": {
-							"name": "comment.line.double-slash"
-						},
-						"4": {
-							"name": "storage.type.annotation"
-						},
-						"5": {
 							"name": "comment.line.double-slash"
 						}
 					}
@@ -409,7 +309,7 @@
 					"name": "comment.line.double-slash"
 				}
 			},
-			"end": "(?=(^\\s*(?!//)[^\\s\\|].*?\\|.*?\\|.*$))",
+			"end": "(?=^(\\s*[^\\s\\|].*?\\|.*?\\|.*|\\s*\\|\\s*\\|.*)$)",
 			"patterns": [
 				{
 					"match": "^\\s*(\\|)(.*?)(\\|)(.*)$",
@@ -428,26 +328,6 @@
 							"name": "constant.character.escape"
 						},
 						"4": {
-							"name": "comment.line.double-slash"
-						}
-					}
-				},
-				{
-					"match": "^\\s*(//.*?)(\\|)(.*?)(\\|)(.*)$",
-					"captures": {
-						"1": {
-							"name": "comment.line.double-slash"
-						},
-						"2": {
-							"name": "constant.character.escape"
-						},
-						"3": {
-							"name": "comment.line.double-slash"
-						},
-						"4": {
-							"name": "constant.character.escape"
-						},
-						"5": {
 							"name": "comment.line.double-slash"
 						}
 					}
@@ -476,7 +356,7 @@
 					"name": "comment.line.double-slash"
 				}
 			},
-			"end": "(?=(^\\s*(?!//)[^\\s\\|].*?\\|.*?\\|.*$))",
+			"end": "(?=^(\\s*[^\\s\\|].*?\\|.*?\\|.*|\\s*\\|\\s*\\|.*)$)",
 			"patterns": [
 				{
 					"match": "^\\s*(\\|)(.*?)(\\|)(.*)$",
@@ -498,26 +378,6 @@
 							"name": "comment.line.double-slash"
 						}
 					}
-				},
-				{
-					"match": "^\\s*(//.*?)(\\|)(.*?)(\\|)(.*)$",
-					"captures": {
-						"1": {
-							"name": "comment.line.double-slash"
-						},
-						"2": {
-							"name": "meta.preprocessor"
-						},
-						"3": {
-							"name": "comment.line.double-slash"
-						},
-						"4": {
-							"name": "meta.preprocessor"
-						},
-						"5": {
-							"name": "comment.line.double-slash"
-						}
-					}
 				}
 			]
 		},
@@ -534,7 +394,7 @@
 					"name": "comment.line.double-slash"
 				}
 			},
-			"end": "(?=(^\\s*(?!//)[^\\s\\|].*?\\|.*?\\|.*$))",
+			"end": "(?=^(\\s*[^\\s\\|].*?\\|.*?\\|.*|\\s*\\|\\s*\\|.*)$)",
 			"patterns": [
 				{
 					"match": "^\\s*(\\|)\\s*(\\-\\-\\>)(.*?)(\\|)(.*)$",
@@ -573,26 +433,6 @@
 							"name": "string.quoted.double"
 						},
 						"4": {
-							"name": "comment.line.double-slash"
-						}
-					}
-				},
-				{
-					"match": "^\\s*(//.*?)(\\|)(.*?)(\\|)(.*)$",
-					"captures": {
-						"1": {
-							"name": "comment.line.double-slash"
-						},
-						"2": {
-							"name": "string.quoted.double"
-						},
-						"3": {
-							"name": "comment.line.double-slash"
-						},
-						"4": {
-							"name": "string.quoted.double"
-						},
-						"5": {
 							"name": "comment.line.double-slash"
 						}
 					}
