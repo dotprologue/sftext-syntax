@@ -3,444 +3,749 @@
 	"name": "SFText",
 	"patterns": [
 		{
-			"match": "^\\s*(//.*?)(\\|)(.*?)(\\|)(.*)$",
-			"captures": {
-				"1": {
-					"name": "comment.line.double-slash"
-				},
-				"2": {
-					"name": "meta.preprocessor"
-				},
-				"3": {
-					"name": "comment.line.double-slash"
-				},
-				"4": {
-					"name": "meta.preprocessor"
-				},
-				"5": {
-					"name": "comment.line.double-slash"
-				}
-			}
-		},
-		{
-			"match": "^\\s*(\\|)(.*?)(\\|)(.*)$",
-			"captures": {
-				"1": {
-					"name": "meta.preprocessor"
-				},
-				"2": {
-					"name": "comment.line.double-slash"
-				},
-				"3": {
-					"name": "meta.preprocessor"
-				},
-				"4": {
-					"name": "comment.line.double-slash"
-				}
-			}
-		},
-		{
-			"begin": "^(\\s*#.*?\\|.*?\\|.*)$",
+			"begin": "^([^\\|]*)(\\|)(\\s*//[^\\|]*\\|[^\\|]*\\|.*)$",
 			"beginCaptures": {
 				"1": {
 					"patterns": [
 						{
-							"match": "^\\s*(#)(command|xcommand|token|define|label)\\s*(\\|)(.*?)(\\|)(.*)$",
-							"captures": {
-								"1": {
-									"name": "variable.parameter"
-								},
-								"2": {
-									"name": "variable.parameter"
-								},
-								"3": {
-									"name": "variable.parameter"
-								},
-								"4": {
-									"patterns": [
-										{
-											"include": "#argument"
-										}
-									]
-								},
-								"5": {
-									"name": "variable.parameter"
-								},
-								"6": {
-									"name": "comment.line.double-slash"
-								}
-							}
+							"include": "#annotation"
+						}
+					]
+				},
+				"2": {
+					"patterns": [
+						{
+							"include": "#comment.vbar"
+						}
+					]
+				},
+				"3": {
+					"patterns": [
+						{
+							"include": "#comment.body"
 						}
 					]
 				}
 			},
-			"end": "(?=^(\\s*[^\\s\\|].*?\\|.*?\\|.*|\\s*\\|\\s*\\|.*)$)",
+			"end": "(?=^([^\\|]*\\|\\s*[^\\|\\s][^\\|]*\\|[^\\|]*\\|.*)$)",
 			"patterns": [
 				{
-					"match": "^\\s*(\\|)(.*?)(\\|)(.*)$",
+					"match": "([^\\|]*)(\\|)([^\\|]*\\|[^\\|]*\\|.*)",
 					"captures": {
 						"1": {
-							"name": "variable.parameter"
+							"patterns": [
+								{
+									"include": "#empty"
+								}
+							]
 						},
 						"2": {
 							"patterns": [
 								{
-									"include": "#argument"
+									"include": "#comment.vbar"
 								}
 							]
 						},
 						"3": {
-							"name": "variable.parameter"
-						},
-						"4": {
-							"name": "comment.line.double-slash"
+							"patterns": [
+								{
+									"include": "#comment.body"
+								}
+							]
 						}
 					}
 				}
 			]
 		},
 		{
-			"begin": "^\\s*(\\$)(standard|f-standard|s-standard|p-standard)\\s*(\\|)(.*?)(\\|)(.*)$",
+			"begin": "^(\\s*//[^\\|]*\\|[^\\|]*\\|[^\\|]*)$",
 			"beginCaptures": {
 				"1": {
-					"name": "entity.name.method"
-				},
-				"2": {
-					"name": "entity.name.method"
-				},
-				"3": {
-					"name": "entity.name.method"
-				},
-				"4": {
-					"name": "entity.name.method"
-				},
-				"5": {
-					"name": "entity.name.method"
-				},
-				"6": {
-					"name": "comment.line.double-slash"
+					"patterns": [
+						{
+							"include": "#comment.body"
+						}
+					]
 				}
 			},
-			"end": "(?=^(\\s*[^\\s\\|].*?\\|.*?\\|.*|\\s*\\|\\s*\\|.*)$)",
+			"end": "(?=^(\\s*[^\\|\\s][^\\|]*\\|[^\\|]*\\|.*)$)",
 			"patterns": [
 				{
-					"match": "^\\s*(\\|)(.*?)(\\|)(.*)$",
+					"include": "#comment.body"
+				}
+			]
+		},
+		{
+			"begin": "^([^\\|]*)(\\|)(\\s*[^\\|\\$\\#\\s][^\\|]*\\|[^\\|]*\\|.*)$",
+			"beginCaptures": {
+				"1": {
+					"patterns": [
+						{
+							"include": "#annotation"
+						}
+					]
+				},
+				"2": {
+					"patterns": [
+						{
+							"include": "#dialogue.vbar"
+						}
+					]
+				},
+				"3": {
+					"patterns": [
+						{
+							"include": "#dialogue.body"
+						}
+					]
+				}
+			},
+			"end": "(?=^([^\\|]*\\|\\s*[^\\|\\s][^\\|]*\\|[^\\|]*\\|.*)$)",
+			"patterns": [
+				{
+					"match": "([^\\|]*)(\\|)([^\\|]*\\|[^\\|]*\\|.*)",
 					"captures": {
 						"1": {
-							"name": "entity.name.method"
+							"patterns": [
+								{
+									"include": "#empty"
+								}
+							]
 						},
 						"2": {
 							"patterns": [
 								{
-									"include": "#argument"
+									"include": "#dialogue.vbar"
 								}
 							]
 						},
 						"3": {
-							"name": "entity.name.method"
-						},
-						"4": {
-							"name": "comment.line.double-slash"
+							"patterns": [
+								{
+									"include": "#dialogue.body"
+								}
+							]
 						}
 					}
 				}
 			]
 		},
 		{
-			"begin": "^\\s*(\\$)(forced|f-forced|s-forced|p-forced)\\s*(\\|)(.*?)(\\|)(.*)$",
+			"begin": "^(\\s*[^\\|\\$\\#\\s][^\\|]*\\|[^\\|]*\\|[^\\|]*)$",
 			"beginCaptures": {
 				"1": {
-					"name": "entity.name.function"
-				},
-				"2": {
-					"name": "entity.name.function"
-				},
-				"3": {
-					"name": "entity.name.function"
-				},
-				"4": {
-					"name": "entity.name.function"
-				},
-				"5": {
-					"name": "entity.name.function"
-				},
-				"6": {
-					"name": "comment.line.double-slash"
+					"patterns": [
+						{
+							"include": "#dialogue.body"
+						}
+					]
 				}
 			},
-			"end": "(?=^(\\s*[^\\s\\|].*?\\|.*?\\|.*|\\s*\\|\\s*\\|.*)$)",
+			"end": "(?=^(\\s*[^\\|\\s][^\\|]*\\|[^\\|]*\\|.*)$)",
 			"patterns": [
 				{
-					"match": "^\\s*(\\|)(.*?)(\\|)(.*)$",
+					"include": "#dialogue.body"
+				}
+			]
+		},
+		{
+			"begin": "^([^\\|]*)(\\|)(\\s*#[^\\|]*\\|[^\\|]*\\|.*)$",
+			"beginCaptures": {
+				"1": {
+					"patterns": [
+						{
+							"include": "#annotation"
+						}
+					]
+				},
+				"2": {
+					"patterns": [
+						{
+							"include": "#macro.vbar"
+						}
+					]
+				},
+				"3": {
+					"patterns": [
+						{
+							"include": "#macro.start"
+						}
+					]
+				}
+			},
+			"end": "(?=^([^\\|]*\\|\\s*[^\\|\\s][^\\|]*\\|[^\\|]*\\|.*)$)",
+			"patterns": [
+				{
+					"match": "([^\\|]*)(\\|)([^\\|]*\\|[^\\|]*\\|.*)",
 					"captures": {
 						"1": {
-							"name": "entity.name.function"
+							"patterns": [
+								{
+									"include": "#empty"
+								}
+							]
 						},
 						"2": {
 							"patterns": [
 								{
-									"include": "#argument"
+									"include": "#macro.vbar"
 								}
 							]
 						},
 						"3": {
-							"name": "entity.name.function"
-						},
-						"4": {
-							"name": "comment.line.double-slash"
+							"patterns": [
+								{
+									"include": "#macro.body"
+								}
+							]
 						}
 					}
 				}
 			]
 		},
 		{
-			"begin": "^\\s*(\\$)(promised|f-promised|s-promised|p-promised)\\s*(\\|)(.*?)(\\|)(.*)$",
+			"begin": "^(\\s*#[^\\|]*\\|[^\\|]*\\|[^\\|]*)$",
 			"beginCaptures": {
 				"1": {
-					"name": "support.function"
-				},
-				"2": {
-					"name": "support.function"
-				},
-				"3": {
-					"name": "support.function"
-				},
-				"4": {
-					"name": "support.function"
-				},
-				"5": {
-					"name": "support.function"
-				},
-				"6": {
-					"name": "comment.line.double-slash"
+					"patterns": [
+						{
+							"include": "#macro.start"
+						}
+					]
 				}
 			},
-			"end": "(?=^(\\s*[^\\s\\|].*?\\|.*?\\|.*|\\s*\\|\\s*\\|.*)$)",
+			"end": "(?=^(\\s*[^\\|\\s][^\\|]*\\|[^\\|]*\\|.*)$)",
 			"patterns": [
 				{
-					"match": "^\\s*(\\|)(.*?)(\\|)(.*)$",
+					"include": "#macro.body"
+				}
+			]
+		},
+		{
+			"begin": "^([^\\|]*)(\\|)(\\s*\\$((f|s|p)-)?standard\\s*\\|[^\\|]*\\|.*)$",
+			"beginCaptures": {
+				"1": {
+					"patterns": [
+						{
+							"include": "#annotation"
+						}
+					]
+				},
+				"2": {
+					"patterns": [
+						{
+							"include": "#standard.vbar"
+						}
+					]
+				},
+				"3": {
+					"patterns": [
+						{
+							"include": "#standard.start"
+						}
+					]
+				}
+			},
+			"end": "(?=^([^\\|]*\\|\\s*[^\\|\\s][^\\|]*\\|[^\\|]*\\|.*)$)",
+			"patterns": [
+				{
+					"match": "([^\\|]*)(\\|)([^\\|]*\\|[^\\|]*\\|.*)",
 					"captures": {
 						"1": {
-							"name": "support.function"
+							"patterns": [
+								{
+									"include": "#empty"
+								}
+							]
 						},
 						"2": {
 							"patterns": [
 								{
-									"include": "#argument"
+									"include": "#standard.vbar"
 								}
 							]
 						},
 						"3": {
-							"name": "support.function"
-						},
-						"4": {
-							"name": "comment.line.double-slash"
+							"patterns": [
+								{
+									"include": "#standard.body"
+								}
+							]
 						}
 					}
 				}
 			]
 		},
 		{
-			"begin": "^\\s*(\\$)(parallel)\\s*(\\|)\\s*(.*?)(\\|)(.*)$",
+			"begin": "^(\\s*\\$((f|s|p)-)?standard\\s*\\|[^\\|]*\\|[^\\|]*)$",
 			"beginCaptures": {
 				"1": {
-					"name": "storage.type.annotation"
-				},
-				"2": {
-					"name": "storage.type.annotation"
-				},
-				"3": {
-					"name": "storage.type.annotation"
-				},
-				"4": {
-					"name": "storage.type.annotation"
-				},
-				"5": {
-					"name": "storage.type.annotation"
-				},
-				"6": {
-					"name": "comment.line.double-slash"
+					"patterns": [
+						{
+							"include": "#standard.start"
+						}
+					]
 				}
 			},
-			"end": "(?=^(\\s*[^\\s\\|].*?\\|.*?\\|.*|\\s*\\|\\s*\\|.*)$)",
+			"end": "(?=^(\\s*[^\\|\\s][^\\|]*\\|[^\\|]*\\|.*)$)",
 			"patterns": [
 				{
-					"match": "^\\s*(\\|)(.*?)(\\|)(.*)$",
+					"include": "#standard.body"
+				}
+			]
+		},
+		{
+			"begin": "^([^\\|]*)(\\|)(\\s*\\$((f|s|p)-)?forced\\s*\\|[^\\|]*\\|.*)$",
+			"beginCaptures": {
+				"1": {
+					"patterns": [
+						{
+							"include": "#annotation"
+						}
+					]
+				},
+				"2": {
+					"patterns": [
+						{
+							"include": "#forced.vbar"
+						}
+					]
+				},
+				"3": {
+					"patterns": [
+						{
+							"include": "#forced.start"
+						}
+					]
+				}
+			},
+			"end": "(?=^([^\\|]*\\|\\s*[^\\|\\s][^\\|]*\\|[^\\|]*\\|.*)$)",
+			"patterns": [
+				{
+					"match": "([^\\|]*)(\\|)([^\\|]*\\|[^\\|]*\\|.*)",
 					"captures": {
 						"1": {
-							"name": "storage.type.annotation"
+							"patterns": [
+								{
+									"include": "#empty"
+								}
+							]
 						},
 						"2": {
 							"patterns": [
 								{
-									"include": "#argument"
+									"include": "#forced.vbar"
 								}
 							]
 						},
 						"3": {
-							"name": "storage.type.annotation"
-						},
-						"4": {
-							"name": "comment.line.double-slash"
+							"patterns": [
+								{
+									"include": "#forced.body"
+								}
+							]
 						}
 					}
 				}
 			]
 		},
 		{
-			"begin": "^\\s*(\\$)(serial)\\s*(\\|)\\s*(.*?)(\\|)(.*)$",
+			"begin": "^(\\s*\\$((f|s|p)-)?forced\\s*\\|[^\\|]*\\|[^\\|]*)$",
 			"beginCaptures": {
 				"1": {
-					"name": "constant.character.escape"
-				},
-				"2": {
-					"name": "constant.character.escape"
-				},
-				"3": {
-					"name": "constant.character.escape"
-				},
-				"4": {
-					"name": "constant.character.escape"
-				},
-				"5": {
-					"name": "constant.character.escape"
-				},
-				"6": {
-					"name": "comment.line.double-slash"
+					"patterns": [
+						{
+							"include": "#forced.start"
+						}
+					]
 				}
 			},
-			"end": "(?=^(\\s*[^\\s\\|].*?\\|.*?\\|.*|\\s*\\|\\s*\\|.*)$)",
+			"end": "(?=^(\\s*[^\\|\\s][^\\|]*\\|[^\\|]*\\|.*)$)",
 			"patterns": [
 				{
-					"match": "^\\s*(\\|)(.*?)(\\|)(.*)$",
+					"include": "#forced.body"
+				}
+			]
+		},
+		{
+			"begin": "^([^\\|]*)(\\|)(\\s*\\$((f|s|p)-)?promised\\s*\\|[^\\|]*\\|.*)$",
+			"beginCaptures": {
+				"1": {
+					"patterns": [
+						{
+							"include": "#annotation"
+						}
+					]
+				},
+				"2": {
+					"patterns": [
+						{
+							"include": "#promised.vbar"
+						}
+					]
+				},
+				"3": {
+					"patterns": [
+						{
+							"include": "#promised.start"
+						}
+					]
+				}
+			},
+			"end": "(?=^([^\\|]*\\|\\s*[^\\|\\s][^\\|]*\\|[^\\|]*\\|.*)$)",
+			"patterns": [
+				{
+					"match": "([^\\|]*)(\\|)([^\\|]*\\|[^\\|]*\\|.*)",
 					"captures": {
 						"1": {
-							"name": "constant.character.escape"
+							"patterns": [
+								{
+									"include": "#empty"
+								}
+							]
 						},
 						"2": {
 							"patterns": [
 								{
-									"include": "#argument"
+									"include": "#promised.vbar"
 								}
 							]
 						},
 						"3": {
-							"name": "constant.character.escape"
-						},
-						"4": {
-							"name": "comment.line.double-slash"
+							"patterns": [
+								{
+									"include": "#promised.body"
+								}
+							]
 						}
 					}
 				}
 			]
 		},
 		{
-			"begin": "^\\s*(\\$)(.*?)(\\|)\\s*(.*?)(\\|)(.*)$",
+			"begin": "^(\\s*\\$((f|s|p)-)?promised\\s*\\|[^\\|]*\\|[^\\|]*)$",
 			"beginCaptures": {
 				"1": {
-					"name": "meta.preprocessor"
-				},
-				"2": {
-					"name": "meta.preprocessor"
-				},
-				"3": {
-					"name": "meta.preprocessor"
-				},
-				"4": {
-					"name": "meta.preprocessor"
-				},
-				"5": {
-					"name": "meta.preprocessor"
-				},
-				"6": {
-					"name": "comment.line.double-slash"
+					"patterns": [
+						{
+							"include": "#promised.start"
+						}
+					]
 				}
 			},
-			"end": "(?=^(\\s*[^\\s\\|].*?\\|.*?\\|.*|\\s*\\|\\s*\\|.*)$)",
+			"end": "(?=^(\\s*[^\\|\\s][^\\|]*\\|[^\\|]*\\|.*)$)",
 			"patterns": [
 				{
-					"match": "^\\s*(\\|)(.*?)(\\|)(.*)$",
+					"include": "#promised.body"
+				}
+			]
+		},
+		{
+			"begin": "^([^\\|]*)(\\|)(\\s*\\$serial\\s*\\|[^\\|]*\\|.*)$",
+			"beginCaptures": {
+				"1": {
+					"patterns": [
+						{
+							"include": "#annotation"
+						}
+					]
+				},
+				"2": {
+					"patterns": [
+						{
+							"include": "#serial.vbar"
+						}
+					]
+				},
+				"3": {
+					"patterns": [
+						{
+							"include": "#serial.start"
+						}
+					]
+				}
+			},
+			"end": "(?=^([^\\|]*\\|\\s*[^\\|\\s][^\\|]*\\|[^\\|]*\\|.*)$)",
+			"patterns": [
+				{
+					"match": "([^\\|]*)(\\|)([^\\|]*\\|[^\\|]*\\|.*)",
 					"captures": {
 						"1": {
-							"name": "meta.preprocessor"
+							"patterns": [
+								{
+									"include": "#empty"
+								}
+							]
 						},
 						"2": {
 							"patterns": [
 								{
-									"include": "#argument"
+									"include": "#serial.vbar"
 								}
 							]
 						},
 						"3": {
-							"name": "meta.preprocessor"
-						},
-						"4": {
-							"name": "comment.line.double-slash"
+							"patterns": [
+								{
+									"include": "#serial.body"
+								}
+							]
 						}
 					}
 				}
 			]
 		},
 		{
-			"begin": "^(\\s*[^\\s\\|].*?\\|\\s*.*?)(\\|)(.*)$",
+			"begin": "^(\\s*\\$serial\\s*\\|[^\\|]*\\|[^\\|]*)$",
 			"beginCaptures": {
 				"1": {
-					"name": "string.quoted.double"
-				},
-				"2": {
-					"name": "string.quoted.double"
-				},
-				"3": {
-					"name": "comment.line.double-slash"
+					"patterns": [
+						{
+							"include": "#serial.start"
+						}
+					]
 				}
 			},
-			"end": "(?=^(\\s*[^\\s\\|].*?\\|.*?\\|.*|\\s*\\|\\s*\\|.*)$)",
+			"end": "(?=^(\\s*[^\\|\\s][^\\|]*\\|[^\\|]*\\|.*)$)",
 			"patterns": [
 				{
-					"match": "^\\s*(\\|)\\s*(\\-\\-\\>)(.*?)(\\|)(.*)$",
+					"include": "#serial.body"
+				}
+			]
+		},
+		{
+			"begin": "^([^\\|]*)(\\|)(\\s*\\$parallel\\s*\\|[^\\|]*\\|.*)$",
+			"beginCaptures": {
+				"1": {
+					"patterns": [
+						{
+							"include": "#annotation"
+						}
+					]
+				},
+				"2": {
+					"patterns": [
+						{
+							"include": "#parallel.vbar"
+						}
+					]
+				},
+				"3": {
+					"patterns": [
+						{
+							"include": "#parallel.start"
+						}
+					]
+				}
+			},
+			"end": "(?=^([^\\|]*\\|\\s*[^\\|\\s][^\\|]*\\|[^\\|]*\\|.*)$)",
+			"patterns": [
+				{
+					"match": "([^\\|]*)(\\|)([^\\|]*\\|[^\\|]*\\|.*)",
 					"captures": {
 						"1": {
-							"name": "string.quoted.double"
+							"patterns": [
+								{
+									"include": "#empty"
+								}
+							]
 						},
 						"2": {
-							"name": "variable.parameter"
+							"patterns": [
+								{
+									"include": "#parallel.vbar"
+								}
+							]
 						},
 						"3": {
 							"patterns": [
 								{
-									"include": "#argument"
+									"include": "#parallel.body"
 								}
 							]
-						},
-						"4": {
-							"name": "string.quoted.double"
-						},
-						"5": {
-							"name": "comment.line.double-slash"
-						}
-					}
-				},
-				{
-					"match": "^\\s*(\\|)(.*?)(\\|)(.*)$",
-					"captures": {
-						"1": {
-							"name": "string.quoted.double"
-						},
-						"2": {
-							"name": "string.quoted.double"
-						},
-						"3": {
-							"name": "string.quoted.double"
-						},
-						"4": {
-							"name": "comment.line.double-slash"
 						}
 					}
 				}
 			]
+		},
+		{
+			"begin": "^(\\s*\\$parallel\\s*\\|[^\\|]*\\|[^\\|]*)$",
+			"beginCaptures": {
+				"1": {
+					"patterns": [
+						{
+							"include": "#parallel.start"
+						}
+					]
+				}
+			},
+			"end": "(?=^(\\s*[^\\|\\s][^\\|]*\\|[^\\|]*\\|.*)$)",
+			"patterns": [
+				{
+					"include": "#parallel.body"
+				}
+			]
+		},
+		{
+			"begin": "^([^\\|]*)(\\|)(\\s*\\$[^\\|]*\\s*\\|[^\\|]*\\|.*)$",
+			"beginCaptures": {
+				"1": {
+					"patterns": [
+						{
+							"include": "#annotation"
+						}
+					]
+				},
+				"2": {
+					"patterns": [
+						{
+							"include": "#general.vbar"
+						}
+					]
+				},
+				"3": {
+					"patterns": [
+						{
+							"include": "#general.start"
+						}
+					]
+				}
+			},
+			"end": "(?=^([^\\|]*\\|\\s*[^\\|\\s][^\\|]*\\|[^\\|]*\\|.*)$)",
+			"patterns": [
+				{
+					"match": "([^\\|]*)(\\|)([^\\|]*\\|[^\\|]*\\|.*)",
+					"captures": {
+						"1": {
+							"patterns": [
+								{
+									"include": "#empty"
+								}
+							]
+						},
+						"2": {
+							"patterns": [
+								{
+									"include": "#general.vbar"
+								}
+							]
+						},
+						"3": {
+							"patterns": [
+								{
+									"include": "#general.body"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"begin": "^(\\s*\\$[^\\|]*\\s*\\|[^\\|]*\\|[^\\|]*)$",
+			"beginCaptures": {
+				"1": {
+					"patterns": [
+						{
+							"include": "#general.start"
+						}
+					]
+				}
+			},
+			"end": "(?=^(\\s*[^\\|\\s][^\\|]*\\|[^\\|]*\\|.*)$)",
+			"patterns": [
+				{
+					"include": "#general.body"
+				}
+			]
+		},
+		{
+			"match": "^(([^\\|]*\\|)?[^\\|]*\\|[^\\|]*\\|)(.*)$",
+			"captures": {
+				"1": {
+					"patterns": [
+						{
+							"include": "#comment.vbar"
+						},
+						{
+							"match": ".",
+							"name": "comment.line.double-slash"
+						}
+					]
+				},
+				"3": {
+					"patterns": [
+						{
+							"include": "#comment"
+						}
+					]
+				}
+			}
 		}
 	],
 	"repository": {
+		"annotation": {
+			"patterns": [
+				{
+					"match": "^\\s*(\\[)(\\d*)(\\])\\s*$",
+					"captures": {
+						"1": {
+							"name": "meta.preprocessor"
+						},
+						"2": {
+							"name": "variable.parameter"
+						},
+						"3": {
+							"name": "meta.preprocessor"
+						}
+					}
+				},
+				{
+					"match": "^\\s*(\\()(\\d*)(\\))\\s*$",
+					"captures": {
+						"1": {
+							"name": "meta.preprocessor"
+						},
+						"2": {
+							"name": "variable.parameter"
+						},
+						"3": {
+							"name": "meta.preprocessor"
+						}
+					}
+				},
+				{
+					"match": "^\\s*(<)(↑|↓)(>)\\s*$",
+					"captures": {
+						"1": {
+							"name": "meta.preprocessor"
+						},
+						"2": {
+							"name": "variable.parameter"
+						},
+						"3": {
+							"name": "meta.preprocessor"
+						}
+					}
+				},
+				{
+					"match": ".",
+					"name": "invalid.illegal"
+				}
+			]
+		},
+		"comment": {
+			"patterns": [
+				{
+					"match": "\\|",
+					"name": "invalid.illegal"
+				},
+				{
+					"match": ".",
+					"name": "comment.line.double-slash"
+				}
+			]
+		},
 		"argument": {
 			"patterns": [
 				{
@@ -450,6 +755,566 @@
 				{
 					"name": "comment.line.double-dash",
 					"match": ".+?"
+				}
+			]
+		},
+		"empty": {
+			"patterns": [
+				{
+					"match": ".",
+					"name": "invalid.illegal"
+				}
+			]
+		},
+		"comment.vbar": {
+			"patterns": [
+				{
+					"match": "\\|",
+					"name": "meta.preprocessor"
+				}
+			]
+		},
+		"comment.body": {
+			"patterns": [
+				{
+					"match": "([^\\|]*\\|[^\\|]*\\|)(.*)",
+					"captures": {
+						"1": {
+							"patterns": [
+								{
+									"include": "#comment.vbar"
+								},
+								{
+									"include": "#comment"
+								}
+							]
+						},
+						"2": {
+							"patterns": [
+								{
+									"include": "#comment"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		"dialogue.vbar": {
+			"patterns": [
+				{
+					"match": "\\|",
+					"name": "string.quoted.double"
+				}
+			]
+		},
+		"dialogue.body": {
+			"patterns": [
+				{
+					"match": "([^\\|]*\\|[^\\|]*\\|)(.*)",
+					"captures": {
+						"1": {
+							"patterns": [
+								{
+									"include": "#dialogue.vbar"
+								},
+								{
+									"match": "\\s*(\\-\\-\\>)([^\\|]*)",
+									"captures": {
+										"1": {
+											"name": "variable.parameter"
+										},
+										"2": {
+											"patterns": [
+												{
+													"include": "#argument"
+												}
+											]
+										}
+									}
+								},
+								{
+									"match": ".",
+									"name": "string.quoted.double"
+								}
+							]
+						},
+						"2": {
+							"patterns": [
+								{
+									"include": "#comment"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		"macro.vbar": {
+			"patterns": [
+				{
+					"match": "\\|",
+					"name": "variable.parameter"
+				}
+			]
+		},
+		"macro.start": {
+			"patterns": [
+				{
+					"match": "([^\\|]*)(\\|[^\\|]*\\|)(.*)",
+					"captures": {
+						"1": {
+							"name": "variable.parameter"
+						},
+						"2": {
+							"patterns": [
+								{
+									"include": "#macro.vbar"
+								},
+								{
+									"include": "#argument"
+								}
+							]
+						},
+						"3": {
+							"patterns": [
+								{
+									"include": "#comment"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		"macro.body": {
+			"patterns": [
+				{
+					"match": "([^\\|]*)(\\|[^\\|]*\\|)(.*)",
+					"captures": {
+						"1": {
+							"name": "invalid.illegal"
+						},
+						"2": {
+							"patterns": [
+								{
+									"include": "#macro.vbar"
+								},
+								{
+									"include": "#argument"
+								}
+							]
+						},
+						"3": {
+							"patterns": [
+								{
+									"include": "#comment"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		"standard.vbar": {
+			"patterns": [
+				{
+					"match": "\\|",
+					"name": "entity.name.method"
+				}
+			]
+		},
+		"standard.start": {
+			"patterns": [
+				{
+					"match": "([^\\|]*)(\\|[^\\|]*\\|)(.*)",
+					"captures": {
+						"1": {
+							"name": "entity.name.method"
+						},
+						"2": {
+							"patterns": [
+								{
+									"include": "#standard.vbar"
+								},
+								{
+									"match": ".",
+									"name": "entity.name.method"
+								}
+							]
+						},
+						"3": {
+							"patterns": [
+								{
+									"include": "#comment"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		"standard.body": {
+			"patterns": [
+				{
+					"match": "([^\\|]*)(\\|[^\\|]*\\|)(.*)",
+					"captures": {
+						"1": {
+							"name": "invalid.illegal"
+						},
+						"2": {
+							"patterns": [
+								{
+									"include": "#standard.vbar"
+								},
+								{
+									"include": "#argument"
+								}
+							]
+						},
+						"3": {
+							"patterns": [
+								{
+									"include": "#comment"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		"forced.vbar": {
+			"patterns": [
+				{
+					"match": "\\|",
+					"name": "entity.name.function"
+				}
+			]
+		},
+		"forced.start": {
+			"patterns": [
+				{
+					"match": "([^\\|]*)(\\|[^\\|]*\\|)(.*)",
+					"captures": {
+						"1": {
+							"name": "entity.name.function"
+						},
+						"2": {
+							"patterns": [
+								{
+									"include": "#forced.vbar"
+								},
+								{
+									"match": ".",
+									"name": "entity.name.function"
+								}
+							]
+						},
+						"3": {
+							"patterns": [
+								{
+									"include": "#comment"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		"forced.body": {
+			"patterns": [
+				{
+					"match": "([^\\|]*)(\\|[^\\|]*\\|)(.*)",
+					"captures": {
+						"1": {
+							"name": "invalid.illegal"
+						},
+						"2": {
+							"patterns": [
+								{
+									"include": "#forced.vbar"
+								},
+								{
+									"include": "#argument"
+								}
+							]
+						},
+						"3": {
+							"patterns": [
+								{
+									"include": "#comment"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		"promised.vbar": {
+			"patterns": [
+				{
+					"match": "\\|",
+					"name": "support.function"
+				}
+			]
+		},
+		"promised.start": {
+			"patterns": [
+				{
+					"match": "([^\\|]*)(\\|[^\\|]*\\|)(.*)",
+					"captures": {
+						"1": {
+							"name": "support.function"
+						},
+						"2": {
+							"patterns": [
+								{
+									"include": "#promised.vbar"
+								},
+								{
+									"match": ".",
+									"name": "support.function"
+								}
+							]
+						},
+						"3": {
+							"patterns": [
+								{
+									"include": "#comment"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		"promised.body": {
+			"patterns": [
+				{
+					"match": "([^\\|]*)(\\|[^\\|]*\\|)(.*)",
+					"captures": {
+						"1": {
+							"name": "invalid.illegal"
+						},
+						"2": {
+							"patterns": [
+								{
+									"include": "#promised.vbar"
+								},
+								{
+									"include": "#argument"
+								}
+							]
+						},
+						"3": {
+							"patterns": [
+								{
+									"include": "#comment"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		"serial.vbar": {
+			"patterns": [
+				{
+					"match": "\\|",
+					"name": "constant.character.escape"
+				}
+			]
+		},
+		"serial.start": {
+			"patterns": [
+				{
+					"match": "([^\\|]*)(\\|[^\\|]*\\|)(.*)",
+					"captures": {
+						"1": {
+							"name": "constant.character.escape"
+						},
+						"2": {
+							"patterns": [
+								{
+									"include": "#serial.vbar"
+								},
+								{
+									"match": ".",
+									"name": "constant.character.escape"
+								}
+							]
+						},
+						"3": {
+							"patterns": [
+								{
+									"include": "#comment"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		"serial.body": {
+			"patterns": [
+				{
+					"match": "([^\\|]*)(\\|[^\\|]*\\|)(.*)",
+					"captures": {
+						"1": {
+							"name": "invalid.illegal"
+						},
+						"2": {
+							"patterns": [
+								{
+									"include": "#serial.vbar"
+								},
+								{
+									"include": "#argument"
+								}
+							]
+						},
+						"3": {
+							"patterns": [
+								{
+									"include": "#comment"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		"parallel.vbar": {
+			"patterns": [
+				{
+					"match": "\\|",
+					"name": "storage.type.annotation"
+				}
+			]
+		},
+		"parallel.start": {
+			"patterns": [
+				{
+					"match": "([^\\|]*)(\\|[^\\|]*\\|)(.*)",
+					"captures": {
+						"1": {
+							"name": "storage.type.annotation"
+						},
+						"2": {
+							"patterns": [
+								{
+									"include": "#parallel.vbar"
+								},
+								{
+									"match": ".",
+									"name": "storage.type.annotation"
+								}
+							]
+						},
+						"3": {
+							"patterns": [
+								{
+									"include": "#comment"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		"parallel.body": {
+			"patterns": [
+				{
+					"match": "([^\\|]*)(\\|[^\\|]*\\|)(.*)",
+					"captures": {
+						"1": {
+							"name": "invalid.illegal"
+						},
+						"2": {
+							"patterns": [
+								{
+									"include": "#parallel.vbar"
+								},
+								{
+									"include": "#argument"
+								}
+							]
+						},
+						"3": {
+							"patterns": [
+								{
+									"include": "#comment"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		"general.vbar": {
+			"patterns": [
+				{
+					"match": "\\|",
+					"name": "meta.preprocessor"
+				}
+			]
+		},
+		"general.start": {
+			"patterns": [
+				{
+					"match": "([^\\|]*)(\\|[^\\|]*\\|)(.*)",
+					"captures": {
+						"1": {
+							"name": "meta.preprocessor"
+						},
+						"2": {
+							"patterns": [
+								{
+									"include": "#general.vbar"
+								},
+								{
+									"match": ".",
+									"name": "meta.preprocessor"
+								}
+							]
+						},
+						"3": {
+							"patterns": [
+								{
+									"include": "#comment"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		"general.body": {
+			"patterns": [
+				{
+					"match": "([^\\|]*)(\\|[^\\|]*\\|)(.*)",
+					"captures": {
+						"1": {
+							"name": "invalid.illegal"
+						},
+						"2": {
+							"patterns": [
+								{
+									"include": "#general.vbar"
+								},
+								{
+									"include": "#argument"
+								}
+							]
+						},
+						"3": {
+							"patterns": [
+								{
+									"include": "#comment"
+								}
+							]
+						}
+					}
 				}
 			]
 		}

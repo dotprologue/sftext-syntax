@@ -1,7 +1,4 @@
 {
-    "comments": {
-        "lineComment": "//"
-    },
     // symbols used as brackets
     "brackets": [
         ["{", "}"],
@@ -15,6 +12,6 @@
         ["{", "}"],
     ],
     "indentationRules": {
-        "unIndentedLinePattern": "^.*$"
+        "unIndentedLinePattern": "."
     }
 }
